@@ -16,11 +16,13 @@ def remove_mostly_blank_rows():
   # Drop rows with any NaN values to remove mostly blank rows
   lego_df.dropna(inplace=True)
 
-def save_new_csv(lego_df):
+def save_new_csv(lego_inventory_df):
     lego_df.to_csv('lego_sets_inventory.csv', index=False)
 
 # Load the Lego CSV file as data frame
 lego_df = pd.read_csv('lego_sets_and_themes.csv')
+
+
 
 # calls fuction to remove unneeded url column
 remove_url_column()
@@ -28,10 +30,24 @@ remove_url_column()
 # calls fuction to remove mostly blank rows
 remove_mostly_blank_rows()
 
-# sort lego df by theme ascending
-lego_df = lego_df.sort_values('theme_name', ascending = True)
-
-
-# Print the new lego dataframe
+# prints the list of all lego sets
 print(lego_df)
 
+# sort lego df by theme ascending
+lego_df = lego_df.sort_values("theme_name", ascending = True)
+
+# This initializes the data frame so that that is has header data in it
+lego_inventory_df = pd.DataFrame(columns=["set_number", "set_name", "year_released", "number_of_parts", "theme_name"])
+
+# This initializes The main loop so that sets can be added to the lego inventory
+done = "no"
+
+while done != "yes":
+  # Asks the user which set number they want added to the inventory.
+  set_number = input("What's that number would you like to add? Don't forget to add the sub number at the end -# ")
+  # Print the updated lego inventory
+  print(lego_inventory_df)
+  # Print the updated lego inventory
+  save_new_csv(lego_inventory_df)
+  # This checks if the user wants to stop adding to the inventory
+  done = input("Are you done entering lego sets into the inventory? yes or no ")
