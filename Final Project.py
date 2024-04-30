@@ -39,15 +39,20 @@ lego_df = lego_df.sort_values("theme_name", ascending = True)
 # This initializes the data frame so that that is has header data in it
 lego_inventory_df = pd.DataFrame(columns=["set_number", "set_name", "year_released", "number_of_parts", "theme_name"])
 
-# This initializes The main loop so that sets can be added to the lego inventory
+# This initializes The main loop so that sets can be added to the lego inventory7
 done = "no"
-
 while done != "yes":
   # Asks the user which set number they want added to the inventory.
   set_number = input("What's that number would you like to add? Don't forget to add the sub number at the end -# ")
+  # locates the set in lego_df
+  entry = lego_df.loc[lego_df['set_number'] == set_number]
+  # adds the row with the set number to inventory
+  lego_inventory_df = pd.concat([lego_inventory_df, entry])
   # Print the updated lego inventory
   print(lego_inventory_df)
   # Print the updated lego inventory
   save_new_csv(lego_inventory_df)
   # This checks if the user wants to stop adding to the inventory
-  done = input("Are you done entering lego sets into the inventory? yes or no ")
+  done = input("Are you done entering lego sets into the inventory? yes or no ").lower()
+
+print(lego_inventory_df)
