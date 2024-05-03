@@ -32,19 +32,21 @@ remove_url_column()
 # calls fuction to remove mostly blank rows
 remove_mostly_blank_rows()
 
+# sort lego df and lego inventory df by theme ascending
+lego_df = lego_df.sort_values("theme_name", ascending = True)
+
 # prints the list of all lego sets
 print("list of all lego sets")
 print(lego_df)
 
-# sort lego df and lego inventory df by theme ascending
-lego_df = lego_df.sort_values("theme_name", ascending = True)
+
 
 # This initializes The main loop so that sets can be added to the lego inventory
 done = "no"
 
 while done != "yes":
   # checks if user wants to remove or add from inventory
-  add_or_remove = input("do you want to add or remove set from inventory? type add or remove ").lower()
+  add_or_remove = input("Do you want to add or remove set from inventory? type add or remove ").lower()
   # to add a row to the inventory
   if add_or_remove == "add":
     # Asks the user which set number they want added to the inventory.
